@@ -1,0 +1,33 @@
+INFO  2017-10-14 11:38:58,008 (Saros.java:220) Starting Saros 14.10.31 running:
+  Java Version: 1.8.0_131
+  Java Vendor: Oracle Corporation
+  Eclipse Runtime Version: 3.12.0.v20160606-1342
+  Operating System: Linux (4.4.0-21-generic)
+  Hardware Architecture: amd64
+INFO  2017-10-14 11:38:58,053 (SarosContext.java:153) creating Saros runtime context...
+DEBUG 2017-10-14 11:38:58,114 (XMPPAccountStore.java:117) loading accounts from file: /home/christian/.saros/config.dat
+DEBUG 2017-10-14 11:38:58,192 (XMPPAccountStore.java:176) loaded 1 account(s)
+INFO  2017-10-14 11:38:58,411 (SarosContext.java:199) successfully created Saros runtime context
+DEBUG 2017-10-14 11:38:58,439 (DataTransferManager.java:467) used transport order for the current XMPP connection: [XMPP-Socks5-Transport, XMPP-IBB-Transport]
+INFO  2017-10-14 11:38:58,469 (PreferenceInitializer.java:50) initializing preference default values
+DEBUG 2017-10-14 11:38:58,527 (SarosAnnotation.java:117) resetting annotation colors
+DEBUG 2017-10-14 11:38:58,536 (Saros.java:430) skipping conversion of old XMPP accounts, because there are already new ones
+DEBUG 2017-10-14 11:39:05,649 (WhiteboardManager.java:194) WhiteboardManager instantiated
+DEBUG 2017-10-14 11:39:05,701 (DocumentRecord.java:93) Added Node: attr(150797394569729777) name=svg
+DEBUG 2017-10-14 11:39:05,802 (XMPPConnectionService.java:439) started Socks5 proxy on port: 7777 [listening on all interfaces]
+DEBUG 2017-10-14 11:39:05,806 (XMPPConnectionService.java:459) using autodetected addresses: [10.42.23.47, fe80:0:0:0:9fb1:b36e:4bf6:a381%enp1s0]
+DEBUG 2017-10-14 11:39:05,815 (XMPPConnectionService.java:398)  new connection state == CONNECTING
+ERROR 2017-10-14 11:39:06,001 (StunServiceImpl.java:155) an error occurred while performing a STUN discovery: ICMP Port Unreachable
+java.net.PortUnreachableException: ICMP Port Unreachable
+	at java.net.PlainDatagramSocketImpl.receive0(Native Method)
+	at java.net.AbstractPlainDatagramSocketImpl.receive(AbstractPlainDatagramSocketImpl.java:143)
+	at java.net.DatagramSocket.receive(DatagramSocket.java:812)
+	at de.fu_berlin.inf.dpp.net.stun.internal.StunServiceImpl$StunDiscovery.performStunDiscovery(StunServiceImpl.java:284)
+	at de.fu_berlin.inf.dpp.net.stun.internal.StunServiceImpl$StunDiscovery.run(StunServiceImpl.java:151)
+	at java.lang.Thread.run(Thread.java:748)
+DEBUG 2017-10-14 11:39:07,001 (XMPPConnectionService.java:398) xeno2@saros-con.imp.fu-berlin.de/Saros new connection state == CONNECTED
+DEBUG 2017-10-14 11:39:07,001 (DataTransferManager.java:467) used transport order for the current XMPP connection: [XMPP-Socks5-Transport, XMPP-IBB-Transport]
+DEBUG 2017-10-14 11:39:07,005 (SkypeManager.java:289) Refreshing Skype username cache...
+DEBUG 2017-10-14 11:39:19,008 (XMPPConnectionService.java:398) xeno2@saros-con.imp.fu-berlin.de/Saros new connection state == DISCONNECTING
+DEBUG 2017-10-14 11:39:19,169 (XMPPConnectionService.java:398)  new connection state == NOT_CONNECTED
+DEBUG 2017-10-14 11:39:19,171 (UPnPServiceImpl.java:295) deleting existing port mappings
