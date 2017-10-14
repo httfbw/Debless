@@ -58,9 +58,9 @@ public class Maze {
 
 			// while(notDone) {
 			//for (int i = 0; i < 10000; i++) {
-				int[] dir = getDirection(xPos, yPos, 0x000000);
+				int[] dir = getDirection(xPos, yPos, 0x000000, 2);
 				if (dir.length == 1) {
-					dir = getDirection(xPos, yPos, 0xFFF000);
+					dir = getDirection(xPos, yPos, 0xFFF000, 1);
 					if (dir.length == 1) {
 						notDone = false;
 						System.out.println("actually done");
@@ -93,14 +93,14 @@ public class Maze {
 		}
 	}
 
-	private int[] getDirection(int xPos, int yPos, int color) {
+	private int[] getDirection(int xPos, int yPos, int color, int distance) {
 		int[] rV = new int[1];
 		ArrayList<int[]> possibleDirections = new ArrayList<>();
 		int[] dir;
 		for (int i = 0; i < 4; i++) {
 			dir = convertInt(i);
 
-			if (ableToGo(xPos, yPos, color, dir))
+			if (ableToGo(xPos, yPos, color, dir, distance))
 				possibleDirections.add(dir);
 		}
 		if (possibleDirections.size() == 0)
@@ -121,6 +121,7 @@ public class Maze {
 			break;
 		case 2:
 			rV = new int[] { 0, 1 };
+			break;
 		case 3:
 			rV = new int[] { 0, -1 };
 			
@@ -129,12 +130,15 @@ public class Maze {
 
 		}
 
+		System.out.println(rV[0] + " " + rV[1]);
+		
+		
 		return rV;
 	}
 
-	private boolean ableToGo(int xPos, int yPos, int color, int[] dir) {
-		xPos += (dir[0] * 2);
-		yPos += (dir[1] * 2);
+	private boolean ableToGo(int xPos, int yPos, int color, int[] dir, int distance) {
+		xPos += (dir[0] * distance);
+		yPos += (dir[1] * distance);
 		try {
 			if (level.pixels[xPos][yPos] == color)
 				return true;

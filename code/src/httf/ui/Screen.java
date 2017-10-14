@@ -20,7 +20,7 @@ public class Screen extends Bitmap {
 	
 	public Screen(int width, int height) {
 		super(width, height);
-		maze = new Maze(RetroGame.WIDTH, RetroGame.HEIGHT, Maze.CRAZY_LABYRINTH, 160);
+		maze = new Maze(RetroGame.WIDTH/2, RetroGame.HEIGHT/2, Maze.DEPTH_FIRST_SEARCH, 160);
 		tv = ResourceLoader.loadTexture("oldtv");
 		player = new Player(width / 2 - 8, height / 2 - 8);
 		tiles = new ArrayList<>();
@@ -60,11 +60,12 @@ public class Screen extends Bitmap {
 				pixels[x][y] = 0x343434;
 		
 		for(int i = 0; i < tiles.size(); i++) {
-			draw(tiles.get(i).tex, (width / 2 - 80 - 24) + tiles.get(i).x * 16, (height / 2 - 80 - 6) + tiles.get(i).y * 16);
+			//draw(tiles.get(i).tex, (width / 2 - 80 - 24) + tiles.get(i).x * 16, (height / 2 - 80 - 6) + tiles.get(i).y * 16);
 		}
 		draw(player.texture, (width / 2 - 88) + maze.getXPlayer(), (height / 2 - 88) + maze.getYPlayer());
-		draw(tv, 0, 0);
-		draw(maze.getPlayerView(8), 0, 0);
+		//draw(tv, 0, 0);
+		draw(maze.level, 0, 0);
+		maze.generateDepthFirstSearch();
 	}
 	
 	public void postProcess() {
