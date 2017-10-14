@@ -1,4 +1,6 @@
 code/bin
 code/.settings
+.metadata/*
+.recommenders/*
 
 /.metadata/

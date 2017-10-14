@@ -4,6 +4,7 @@ import java.awt.Toolkit;
 
 import httf.map.Maze;
 import httf.util.ResourceLoader;
+import httf.map.Maze;
 
 public class Screen extends Bitmap {
 	
