@@ -122,6 +122,7 @@ public class RetroGame extends Canvas implements Runnable {
 				screen.maze.tick(1, 0);
 			}
 		}
+		}
 	}
 	
 	private void render(int PlayerCoordinateX, int PlayerCoordinateY) {
@@ -135,7 +136,6 @@ public class RetroGame extends Canvas implements Runnable {
 		
 		for(int x = 0; x < WIDTH; x++) {
 			for(int y = 0; y < HEIGHT; y++) {
-				pixels[x + y * WIDTH] = screen.pixels[x + y * WIDTH];
 				pixels[x + y * WIDTH] = screen.pixels[x][y];
 				img.setRGB(x, y, pixels[x + y * WIDTH]);
 			}
