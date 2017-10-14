@@ -1,8 +1,0 @@
-ERROR 2017-10-14 11:39:30,332 (StunServiceImpl.java:155) an error occurred while performing a STUN discovery: ICMP Port Unreachable
-java.net.PortUnreachableException: ICMP Port Unreachable
-	at java.net.PlainDatagramSocketImpl.receive0(Native Method)
-	at java.net.AbstractPlainDatagramSocketImpl.receive(AbstractPlainDatagramSocketImpl.java:143)
-	at java.net.DatagramSocket.receive(DatagramSocket.java:812)
-	at de.fu_berlin.inf.dpp.net.stun.internal.StunServiceImpl$StunDiscovery.performStunDiscovery(StunServiceImpl.java:284)
-	at de.fu_berlin.inf.dpp.net.stun.internal.StunServiceImpl$StunDiscovery.run(StunServiceImpl.java:151)
-	at java.lang.Thread.run(Thread.java:748)
