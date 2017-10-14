@@ -19,6 +19,8 @@ public class RetroGame extends Canvas implements Runnable {
 	public final int WIDTH = 300;
 	public final int HEIGHT = 300;
 	public final int SCALE = 4;
+	public int PlayerCoordinateX = 150;
+	public int PlayerCoordinateY = 150;
 	
 	public JFrame frame;
 	public BufferedImage img;
@@ -69,7 +71,7 @@ public class RetroGame extends Canvas implements Runnable {
 	public void run() {
 		while(running) {
 			tick();
-			render();
+			render(PlayerCoordinateX, PlayerCoordinateY);
 		}
 	}
 	
@@ -77,16 +79,31 @@ public class RetroGame extends Canvas implements Runnable {
 		if(input.keys[KeyEvent.VK_ESCAPE]) {
 			System.exit(0);
 		}
+
+		if(input.keys[KeyEvent.VK_D]) {
+			PlayerCoordinateX++;
+		}
+		if(input.keys[KeyEvent.VK_S]) {
+			PlayerCoordinateY++;
+		}
+		if(input.keys[KeyEvent.VK_W]) {
+			if(PlayerCoordinateY >= 1)
+			PlayerCoordinateY--;
+		}
+		if(input.keys[KeyEvent.VK_A]) {
+			if(PlayerCoordinateX >= 1)
+			PlayerCoordinateX--;
+		}
 	}
 	
-	private void render() {
+	private void render(int PlayerCoordinateX, int PlayerCoordinateY) {
 		BufferStrategy bs = getBufferStrategy();
 		if(bs == null) {
 			createBufferStrategy(3);
 			return;
 		}
 		
-		screen.render();
+		screen.render(PlayerCoordinateX, PlayerCoordinateY);
 		
 		for(int x = 0; x < WIDTH; x++) {
 			for(int y = 0; y < HEIGHT; y++) {

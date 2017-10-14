@@ -1,5 +1,6 @@
 package httf.ui;
 
+import httf.RetroGame;
 import httf.util.ResourceLoader;
 
 public class Screen extends Bitmap {
@@ -15,10 +16,10 @@ public class Screen extends Bitmap {
 		erde = ResourceLoader.loadTexture("gras");
 	}
 	
-	public void render() {
+	public void render(int PLAYERx, int PLAYERy) {
 		Quadratfill(18, test, 16, 10);
 		Quaderfill(10, 5, erde, 10, 10);
-		draw(test, 0, 0);
+		draw(erde, PLAYERx, PLAYERy);
 		draw(erde, 8, 8);
 	}
 	/**Quadratfill Tilemenge(wird Quadriert x=y)[int], Textur, Offset auf X[int], Offset auf Y[int] **/
