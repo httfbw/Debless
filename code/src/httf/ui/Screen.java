@@ -17,9 +17,10 @@ public class Screen extends Bitmap {
 		maze = new Maze(RetroGame.WIDTH, RetroGame.HEIGHT, Maze.CRAZY_LABYRINTH, 160);
 		player = new Player(width / 2 - 8, height / 2 - 8);
 		tiles = new ArrayList<>();
+//		tiles.add(new Tile(0, 0, Tile.floor));
 		for(int x = 0; x < 10; x++) {
 			for(int y = 0; y < 10; y++) {
-				tiles.add(new Tile(x, y, Tile.floor));
+				tiles.add(new Tile((int) x, (int) y, Tile.floor));
 			}
 		}
 	}
@@ -30,10 +31,9 @@ public class Screen extends Bitmap {
 				pixels[x][y] = 0x343434;
 		
 		for(int i = 0; i < tiles.size(); i++) {
-			draw(tiles.get(i).tex, tiles.get(i).x * 16, tiles.get(i).y * 16);
+			draw(tiles.get(i).tex, tiles.get(i).x * 16, tiles.get(i).y * 10);
 		}
 		draw(maze.getPlayerView(4), 0, 0);
-//		draw(maze.level, 0, 0);
 		draw(player.texture, maze.getXPlayer(), maze.getYPlayer());
 	}
 	
