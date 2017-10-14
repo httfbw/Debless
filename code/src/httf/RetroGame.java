@@ -18,7 +18,7 @@ public class RetroGame extends Canvas implements Runnable {
 	
 	public static final int WIDTH = 300;
 	public static final int HEIGHT = 210;
-	public static final int SCALE = 3;
+	public static final int SCALE = 4;
 	
 	public JFrame frame;
 	public BufferedImage img;
@@ -76,6 +76,18 @@ public class RetroGame extends Canvas implements Runnable {
 	private void tick() {
 		if(input.keys[KeyEvent.VK_ESCAPE]) {
 			System.exit(0);
+		}
+		if(input.keys[KeyEvent.VK_W]) {
+			if(screen.yPlayer > 0) screen.yPlayer--;
+		}
+		if(input.keys[KeyEvent.VK_A]) {
+			if(screen.xPlayer > 0) screen.xPlayer--;
+		}
+		if(input.keys[KeyEvent.VK_S]) {
+			if(screen.yPlayer < HEIGHT - 24) screen.yPlayer++;
+		}
+		if(input.keys[KeyEvent.VK_D]) {
+			if(screen.xPlayer < WIDTH - 16) screen.xPlayer++;
 		}
 	}
 	
