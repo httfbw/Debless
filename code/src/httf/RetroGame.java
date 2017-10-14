@@ -18,7 +18,7 @@ public class RetroGame extends Canvas implements Runnable {
 	
 	public final int WIDTH = 300;
 	public final int HEIGHT = 210;
-	public final int SCALE = 4;
+	public final int SCALE = 2;
 	
 	public JFrame frame;
 	public BufferedImage img;
