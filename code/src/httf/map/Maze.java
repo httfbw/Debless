@@ -11,10 +11,14 @@ public class Maze {
 	public static final int CRAZY_LABYRINTH = 1;
 
 	private Bitmap level;
+	private int xPos;
+	private int yPos;
+	
+	private int blockSize;
 	private int xPlayer;
 	private int yPlayer;
 
-	public Maze(int width, int height, int type) {
+	public Maze(int width, int height, int type, int blockSize) {
 		level = new Bitmap(width, height);
 		switch (type) {
 		case 1:
@@ -25,8 +29,13 @@ public class Maze {
 		}
 
 		Random rand = new Random();
-		xPlayer = rand.nextInt(width);
-		yPlayer = rand.nextInt(height);
+		xPos = rand.nextInt(width);
+		yPos = rand.nextInt(height);
+		
+		this.blockSize = blockSize;
+		xPlayer = yPlayer = blockSize/2;
+		
+		
 		draw(xPlayer, yPlayer, 0xFF0000);
 		System.out.println(xPlayer + " " + yPlayer);
 	}
@@ -107,12 +116,54 @@ public class Maze {
 		xPlayer += xVec;
 		yPlayer += yVec;
 		System.out.println("new PlayerPos: " + xPlayer + " " + yPlayer);
-		if (level.pixels[xPlayer][yPlayer] == 0x000000) {
-			xPlayer -= xVec;
-			yPlayer -= yVec;
+		
+		int xMove = 0;
+		if (xPlayer < 0) {
+			xPos --;
+			xPlayer = blockSize;
+			xMove = 1;
+		} else if (xPlayer > blockSize) {
+			xPos ++;
+			xPlayer = 0;
+			xMove = -1;
+		}
+		
+		int yMove = 0;
+		if (yPlayer < 0) {
+			yPos --;
+			yPlayer = blockSize;
+			yMove = 1;
+		} else if (yPlayer > blockSize) {
+			yPos ++;
+			yPlayer = 0;
+			yMove = -1;
+		}
+		
+		if (level.pixels[xPos][yPos] == 0x000000) {
+			xPos += xMove;
+			if (xPlayer == 0) {
+				xPlayer = blockSize;
+			} else {
+				xPlayer = 0;
+			}
+			
+			yPos += yMove;
+			if (yPlayer == 0) {
+				yPlayer = blockSize;
+			} else {
+				yPlayer = 0;
+			}
 		}
 		draw(xPlayer, yPlayer, 0xFF0000);
 		
+	}
+	
+	public int getXPlayer() {
+		return xPlayer;
+	}
+	
+	public int getYPlayer() {
+		return yPlayer;
 	}
 
 }
