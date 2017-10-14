@@ -1,6 +1,7 @@
 
 package httf.map;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import httf.ui.Bitmap;
@@ -9,11 +10,12 @@ public class Maze {
 
 	public static final int RANDOM = 0;
 	public static final int CRAZY_LABYRINTH = 1;
+	public static final int DEPTH_FIRST_SEARCH = 2;
 
 	public Bitmap level;
 	private int xPos;
 	private int yPos;
-	
+
 	private int blockSize;
 	private int xPlayer;
 	private int yPlayer;
@@ -24,6 +26,9 @@ public class Maze {
 		case 1:
 			generateCrazyLabyrinth();
 			break;
+		case 2:
+			generateDepthFirstSearch();
+			break;
 		default:
 			generateRandom();
 		}
@@ -31,14 +36,112 @@ public class Maze {
 		Random rand = new Random();
 		xPos = rand.nextInt(width);
 		yPos = rand.nextInt(height);
-		
+
+		extraXPos = xPos;
+		extraYPos = yPos;
+
 		this.blockSize = blockSize - 1;
-		xPlayer = yPlayer = blockSize/2;
-		
-		
-		
+		xPlayer = yPlayer = blockSize / 2;
+
 		draw(xPos, yPos, 0xFF0000);
-//		System.out.println(xPlayer + " " + yPlayer);
+		System.out.println(xPlayer + " " + yPlayer);
+	}
+
+	private int extraXPos;
+	private int extraYPos;
+	private boolean notDone = true;
+
+	public void generateDepthFirstSearch() {
+		if (notDone) {
+			int xPos = this.extraXPos;
+			int yPos = this.extraYPos;
+
+			// while(notDone) {
+			//for (int i = 0; i < 10000; i++) {
+				int[] dir = getDirection(xPos, yPos, 0x000000);
+				if (dir.length == 1) {
+					dir = getDirection(xPos, yPos, 0xFFF000);
+					if (dir.length == 1) {
+						notDone = false;
+						System.out.println("actually done");
+					} else {
+						level.pixels[xPos][yPos] = 0xFFFFFF;
+						xPos += dir[0];
+						yPos += dir[1];
+						level.pixels[xPos][yPos] = 0xFFFFFF;
+						xPos += dir[0];
+						yPos += dir[1];
+						level.pixels[xPos][yPos] = 0xFFFFFF;
+						System.out.println("any whiteSetting");
+					}
+				} else {
+					level.pixels[xPos][yPos] = 0xFFF000;
+					xPos += dir[0];
+					yPos += dir[1];
+					level.pixels[xPos][yPos] = 0xFFF000;
+					xPos += dir[0];
+					yPos += dir[1];
+					level.pixels[xPos][yPos] = 0xFFF000;
+					System.out.println("any greySetting");
+				}
+
+			//}
+
+			System.out.println(xPos + " " + yPos);
+			this.extraXPos = xPos;
+			this.extraYPos = yPos;
+		}
+	}
+
+	private int[] getDirection(int xPos, int yPos, int color) {
+		int[] rV = new int[1];
+		ArrayList<int[]> possibleDirections = new ArrayList<>();
+		int[] dir;
+		for (int i = 0; i < 4; i++) {
+			dir = convertInt(i);
+
+			if (ableToGo(xPos, yPos, color, dir))
+				possibleDirections.add(dir);
+		}
+		if (possibleDirections.size() == 0)
+			return rV;
+
+		int reV = new Random().nextInt(possibleDirections.size());
+		return possibleDirections.get(reV);
+	}
+
+	private int[] convertInt(int i) {
+		int[] rV = new int[1];
+		switch (i) {
+		case 0:
+			rV = new int[] { 1, 0 };
+			break;
+		case 1:
+			rV = new int[] { -1, 0 };
+			break;
+		case 2:
+			rV = new int[] { 0, 1 };
+		case 3:
+			rV = new int[] { 0, -1 };
+			
+			break;
+		default:
+
+		}
+
+		return rV;
+	}
+
+	private boolean ableToGo(int xPos, int yPos, int color, int[] dir) {
+		xPos += (dir[0] * 2);
+		yPos += (dir[1] * 2);
+		try {
+			if (level.pixels[xPos][yPos] == color)
+				return true;
+		} catch (ArrayIndexOutOfBoundsException e) {
+
+		}
+		return false;
 	}
 
 	private int getRandom() {
@@ -49,7 +152,6 @@ public class Maze {
 	}
 
 	private void generateCrazyLabyrinth() {
-		Random rand = new Random();
 
 		for (int x = 0; x < level.pixels.length; x += 3) {
 			for (int y = 0; y < level.pixels[x].length; y += 3) {
@@ -102,7 +204,6 @@ public class Maze {
 					playerView.pixels[x][y] = level.pixels[xLoad][yLoad];
 				} catch (ArrayIndexOutOfBoundsException e) {
 					playerView.pixels[x][y] = 0x000000;
-//					System.out.println("end of map is reached");
 				}
 				yLoad++;
 			}
@@ -116,53 +217,51 @@ public class Maze {
 		draw(xPos, yPos, 0xFFFFFF);
 		xPlayer += xVec;
 		yPlayer += yVec;
-		
+
 		// Old file: /home/christian/workspace/httf/code/src/httf/map/Maze.java
-		
+
 		if (xPlayer < 0) {
-			if(level.pixels[xPos - 1][yPos] != 0x000000) {
+			if (level.pixels[xPos - 1][yPos] != 0x000000) {
 				xPos--;
 				xPlayer = blockSize;
 			} else {
 				xPlayer = 0;
 			}
 		} else if (xPlayer > blockSize) {
-			if(level.pixels[xPos + 1][yPos] != 0x000000) {
+			if (level.pixels[xPos + 1][yPos] != 0x000000) {
 				xPos++;
 				xPlayer = 0;
 			} else {
 				xPlayer = blockSize;
 			}
 		}
-		
+
 		if (yPlayer < 0) {
-			if(level.pixels[xPos][yPos - 1] != 0x000000) {
+			if (level.pixels[xPos][yPos - 1] != 0x000000) {
 				yPos--;
 				yPlayer = blockSize;
 			} else {
 				yPlayer = 0;
 			}
 		} else if (yPlayer > blockSize) {
-			if(level.pixels[xPos][yPos + 1] != 0x000000) {
+			if (level.pixels[xPos][yPos + 1] != 0x000000) {
 				yPos++;
 				yPlayer = 0;
 			} else {
 				yPlayer = blockSize;
 			}
 		}
-		
+
 		draw(xPos, yPos, 0xFF0000);
-//		System.out.println("new PlayerPos: " + xPlayer + " " + yPlayer + " : " + xPos + " " + yPos);
-		
+
 	}
-	
+
 	public int getXPlayer() {
 		return xPlayer;
 	}
-	
+
 	public int getYPlayer() {
 		return yPlayer;
-}
+	}
 
 }
-
