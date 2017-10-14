@@ -17,7 +17,7 @@ import httf.util.InputHandler;
 public class RetroGame extends Canvas implements Runnable {
 	
 	public final int WIDTH = 300;
-	public final int HEIGHT = 210;
+	public final int HEIGHT = 300;
 	public final int SCALE = 4;
 	
 	public JFrame frame;
@@ -32,7 +32,7 @@ public class RetroGame extends Canvas implements Runnable {
 	
 	public RetroGame() {
 		input = new InputHandler(65535);
-		frame = new JFrame("Hack to the future 2017");
+		frame = new JFrame("HelloWorld");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(WIDTH * SCALE, HEIGHT * SCALE);
 		frame.setLocationRelativeTo(null);
