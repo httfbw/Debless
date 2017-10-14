@@ -1,10 +1,14 @@
 package httf.ui;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import httf.RetroGame;
 import httf.map.Maze;
 import httf.map.Player;
 import httf.map.Tile;
-import java.util.*;
+import httf.util.*;
 
 public class Screen extends Bitmap {
 	
@@ -12,15 +16,40 @@ public class Screen extends Bitmap {
 	public Player player;
 	public List<Tile> tiles;
 	
+	public Bitmap tv;
+	
 	public Screen(int width, int height) {
 		super(width, height);
 		maze = new Maze(RetroGame.WIDTH, RetroGame.HEIGHT, Maze.CRAZY_LABYRINTH, 160);
+		tv = ResourceLoader.loadTexture("oldtv");
 		player = new Player(width / 2 - 8, height / 2 - 8);
 		tiles = new ArrayList<>();
-//		tiles.add(new Tile(0, 0, Tile.floor));
+//		tiles.add(new Tile(0, 0, Tile.wall));
+		Random rand = new Random();
 		for(int x = 0; x < 10; x++) {
 			for(int y = 0; y < 10; y++) {
-				tiles.add(new Tile((int) x, (int) y, Tile.floor));
+				if(x == 0 || x == 9 || y == 0 || y == 9) {
+					tiles.add(new Tile(x, y, Tile.wall));
+				}
+				else {
+					int id = rand.nextInt(3);
+					Bitmap tex;
+					switch(id) {
+					case 0:
+						tex = Tile.floor0;
+						break;
+					case 1:
+						tex = Tile.floor1;
+						break;
+					case 2:
+						tex = Tile.floor2;
+						break;
+					default:
+						tex = Tile.floor0;
+						break;
+					}
+					tiles.add(new Tile(x, y, tex));
+				}
 			}
 		}
 	}
@@ -31,14 +60,15 @@ public class Screen extends Bitmap {
 				pixels[x][y] = 0x343434;
 		
 		for(int i = 0; i < tiles.size(); i++) {
-			draw(tiles.get(i).tex, tiles.get(i).x * 16, tiles.get(i).y * 10);
+			draw(tiles.get(i).tex, (width / 2 - 80 - 24) + tiles.get(i).x * 16, (height / 2 - 80 - 6) + tiles.get(i).y * 16);
 		}
-		draw(maze.getPlayerView(4), 0, 0);
-		draw(player.texture, maze.getXPlayer(), maze.getYPlayer());
+		draw(player.texture, (width / 2 - 88) + maze.getXPlayer(), (height / 2 - 88) + maze.getYPlayer());
+		draw(tv, 0, 0);
+		draw(maze.getPlayerView(8), 0, 0);
 	}
 	
 	public void postProcess() {
-		// post processing effects
+		
 	}
 	
 }

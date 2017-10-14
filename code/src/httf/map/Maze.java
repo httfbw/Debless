@@ -36,8 +36,9 @@ public class Maze {
 		xPlayer = yPlayer = blockSize/2;
 		
 		
+		
 		draw(xPos, yPos, 0xFF0000);
-		System.out.println(xPlayer + " " + yPlayer);
+//		System.out.println(xPlayer + " " + yPlayer);
 	}
 
 	private int getRandom() {
@@ -101,7 +102,7 @@ public class Maze {
 					playerView.pixels[x][y] = level.pixels[xLoad][yLoad];
 				} catch (ArrayIndexOutOfBoundsException e) {
 					playerView.pixels[x][y] = 0x000000;
-					System.out.println("end of map is reached");
+//					System.out.println("end of map is reached");
 				}
 				yLoad++;
 			}
@@ -151,7 +152,7 @@ public class Maze {
 		}
 		
 		draw(xPos, yPos, 0xFF0000);
-		System.out.println("new PlayerPos: " + xPlayer + " " + yPlayer + " : " + xPos + " " + yPos);
+//		System.out.println("new PlayerPos: " + xPlayer + " " + yPlayer + " : " + xPos + " " + yPos);
 		
 	}
 	

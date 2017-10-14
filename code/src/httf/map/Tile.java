@@ -5,8 +5,10 @@ import httf.util.*;
 
 public class Tile {
 	
-	public static Bitmap floor = ResourceLoader.loadTexture("floor");
-	public static Bitmap ceiling = ResourceLoader.loadTexture("grass");
+	public static Bitmap floor0 = ResourceLoader.loadTexture("floor0");
+	public static Bitmap floor1 = ResourceLoader.loadTexture("floor1");
+	public static Bitmap floor2 = ResourceLoader.loadTexture("floor2");
+	public static Bitmap wall = ResourceLoader.loadTexture("wall");
 	
 	public int x;
 	public int y;

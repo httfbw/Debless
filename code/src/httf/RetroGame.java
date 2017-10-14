@@ -107,6 +107,7 @@ public class RetroGame extends Canvas implements Runnable {
 		}
 		
 		screen.render();
+		screen.postProcess();
 		
 		for(int x = 0; x < WIDTH; x++) {
 			for(int y = 0; y < HEIGHT; y++) {
