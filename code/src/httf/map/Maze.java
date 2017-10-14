@@ -9,9 +9,9 @@ public class Maze {
 	public static final int RANDOM = 0;
 	public static final int CRAZY_LABYRINTH = 1;
 
-	public Bitmap level;
-	public int xPlayer;
-	public int yPlayer;
+	private Bitmap level;
+	private int xPlayer;
+	private int yPlayer;
 	
 	public Maze(int width, int height, int type) {
 		level = new Bitmap(width, height);
@@ -54,7 +54,7 @@ public class Maze {
 				level.pixels[x + 1][y + 2] = getRandom();
 				level.pixels[x + 2][y + 2] = 0x000000;
 				
-				
+			
 
 			}
 		}
@@ -80,10 +80,17 @@ public class Maze {
 		level.pixels[x][y] = color;
 	}
 	
-	public void tick(int xPos, int yPos) {
+	
+	public Bitmap getPlayerView() {
+		
+		
+		return level;
+	}
+	
+	public void tick(int xVec, int yVec) {
 		draw(xPlayer, yPlayer, 0xFFFFFF);
-		xPlayer = xPos;
-		yPlayer = yPos;
+		xPlayer = xVec;
+		yPlayer = yVec;
 		draw(xPlayer, yPlayer, 0xFF0000);
 	}
 
