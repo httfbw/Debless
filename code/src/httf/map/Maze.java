@@ -28,7 +28,7 @@ public class Maze {
 		xPlayer = rand.nextInt(width);
 		yPlayer = rand.nextInt(height);
 		draw(xPlayer, yPlayer, 0xFF0000);
-		System.out.println(xPlayer + " " + yPlayer);
+//		System.out.println(xPlayer + " " + yPlayer);
 	}
 
 	private int getRandom() {
@@ -106,7 +106,7 @@ public class Maze {
 		draw(xPlayer, yPlayer, 0xFFFFFF);
 		xPlayer += xVec;
 		yPlayer += yVec;
-		System.out.println("new PlayerPos: " + xPlayer + " " + yPlayer);
+//		System.out.println("new PlayerPos: " + xPlayer + " " + yPlayer);
 		if (level.pixels[xPlayer][yPlayer] == 0x000000) {
 			xPlayer -= xVec;
 			yPlayer -= yVec;

@@ -10,6 +10,7 @@ public class ResourceLoader {
 	
 	public static Bitmap loadTexture(String res) {
 		try {
+			System.out.println(res);
 			BufferedImage img = ImageIO.read(ResourceLoader.class.getResourceAsStream("/tex/" + res + ".png"));
 			Bitmap result = new Bitmap(img.getWidth(), img.getHeight());
 			for(int x = 0; x < img.getWidth(); x++) {
