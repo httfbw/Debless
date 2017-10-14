@@ -14,7 +14,7 @@ public class ResourceLoader {
 			Bitmap result = new Bitmap(img.getWidth(), img.getHeight());
 			for(int x = 0; x < img.getWidth(); x++) {
 				for(int y = 0; y < img.getHeight(); y++) {
-					result.pixels[x + y * result.width] = img.getRGB(x, y);
+					result.pixels[x][y] = img.getRGB(x, y);
 				}
 			}
 			return result;

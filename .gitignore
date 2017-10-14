@@ -1,4 +1,9 @@
 code/bin
 code/.settings
+<<<<<<< HEAD
 .metadata/*
 .recommenders/*
+=======
+
+/.metadata/
+>>>>>>> 05b291e3464090d49cf8204334dd0a0fefd443cb
