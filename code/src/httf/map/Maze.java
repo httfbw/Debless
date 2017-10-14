@@ -10,11 +10,15 @@ public class Maze {
 	public static final int RANDOM = 0;
 	public static final int CRAZY_LABYRINTH = 1;
 
-	private Bitmap level;
+	public Bitmap level;
+	private int xPos;
+	private int yPos;
+	
+	private int blockSize;
 	private int xPlayer;
 	private int yPlayer;
 
-	public Maze(int width, int height, int type) {
+	public Maze(int width, int height, int type, int blockSize) {
 		level = new Bitmap(width, height);
 		switch (type) {
 		case 1:
@@ -25,10 +29,15 @@ public class Maze {
 		}
 
 		Random rand = new Random();
-		xPlayer = rand.nextInt(width);
-		yPlayer = rand.nextInt(height);
-		draw(xPlayer, yPlayer, 0xFF0000);
-//		System.out.println(xPlayer + " " + yPlayer);
+		xPos = rand.nextInt(width);
+		yPos = rand.nextInt(height);
+		
+		this.blockSize = blockSize - 1;
+		xPlayer = yPlayer = blockSize/2;
+		
+		
+		draw(xPos, yPos, 0xFF0000);
+		System.out.println(xPlayer + " " + yPlayer);
 	}
 
 	private int getRandom() {
@@ -81,8 +90,8 @@ public class Maze {
 	public Bitmap getPlayerView(int viewingDistance) {
 		int size = (2 * viewingDistance) + 1;
 		Bitmap playerView = new Bitmap(size, size);
-		int xLoad = xPlayer - viewingDistance;
-		int yStart = yPlayer - viewingDistance;
+		int xLoad = xPos - viewingDistance;
+		int yStart = yPos - viewingDistance;
 		int yLoad;
 
 		for (int x = 0; x < playerView.pixels.length; x++) {
@@ -103,17 +112,56 @@ public class Maze {
 	}
 
 	public void tick(int xVec, int yVec) {
-		draw(xPlayer, yPlayer, 0xFFFFFF);
+		draw(xPos, yPos, 0xFFFFFF);
 		xPlayer += xVec;
 		yPlayer += yVec;
-//		System.out.println("new PlayerPos: " + xPlayer + " " + yPlayer);
-		if (level.pixels[xPlayer][yPlayer] == 0x000000) {
-			xPlayer -= xVec;
-			yPlayer -= yVec;
+		
+		// Old file: /home/christian/workspace/httf/code/src/httf/map/Maze.java
+		
+		if (xPlayer < 0) {
+			if(level.pixels[xPos - 1][yPos] != 0x000000) {
+				xPos--;
+				xPlayer = blockSize;
+			} else {
+				xPlayer = 0;
+			}
+		} else if (xPlayer > blockSize) {
+			if(level.pixels[xPos + 1][yPos] != 0x000000) {
+				xPos++;
+				xPlayer = 0;
+			} else {
+				xPlayer = blockSize;
+			}
 		}
-		draw(xPlayer, yPlayer, 0xFF0000);
+		
+		if (yPlayer < 0) {
+			if(level.pixels[xPos][yPos - 1] != 0x000000) {
+				yPos--;
+				yPlayer = blockSize;
+			} else {
+				yPlayer = 0;
+			}
+		} else if (yPlayer > blockSize) {
+			if(level.pixels[xPos][yPos + 1] != 0x000000) {
+				yPos++;
+				yPlayer = 0;
+			} else {
+				yPlayer = blockSize;
+			}
+		}
+		
+		draw(xPos, yPos, 0xFF0000);
+		System.out.println("new PlayerPos: " + xPlayer + " " + yPlayer + " : " + xPos + " " + yPos);
 		
 	}
+	
+	public int getXPlayer() {
+		return xPlayer;
+	}
+	
+	public int getYPlayer() {
+		return yPlayer;
+}
 
 }
 
