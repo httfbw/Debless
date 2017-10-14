@@ -7,6 +7,7 @@ public class Screen extends Bitmap {
 	
 	public Bitmap test;
 	public Bitmap erde;
+	public Bitmap TVrahmen;
 	public int tilenumber;
 	
 	public Screen(int width, int height) {
@@ -14,6 +15,7 @@ public class Screen extends Bitmap {
 		
 		test = ResourceLoader.loadTexture("grass");
 		erde = ResourceLoader.loadTexture("gras");
+		TVrahmen = ResourceLoader.loadTexture("Rahmen");
 	}
 	
 	public void render(int PLAYERx, int PLAYERy) {
@@ -21,6 +23,7 @@ public class Screen extends Bitmap {
 		Quaderfill(10, 5, erde, 10, 10);
 		draw(erde, PLAYERx, PLAYERy);
 		draw(erde, 8, 8);
+		draw(TVrahmen, 0, 0);
 	}
 	/**Quadratfill Tilemenge(wird Quadriert x=y)[int], Textur, Offset auf X[int], Offset auf Y[int] **/
 	public void Quadratfill(int tiles, Bitmap texture, int offsetX, int offsetY) {

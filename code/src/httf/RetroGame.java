@@ -16,11 +16,12 @@ import httf.util.InputHandler;
 
 public class RetroGame extends Canvas implements Runnable {
 	
-	public final int WIDTH = 300;
-	public final int HEIGHT = 300;
+	public final int WIDTH = 468;
+	public final int HEIGHT = 313;
 	public final int SCALE = 4;
 	public int PlayerCoordinateX = 150;
 	public int PlayerCoordinateY = 150;
+	public boolean isMainMenu = true;
 	
 	public JFrame frame;
 	public BufferedImage img;
@@ -76,6 +77,9 @@ public class RetroGame extends Canvas implements Runnable {
 	}
 	
 	private void tick() {
+		if(isMainMenu = true)
+		if(input.keys[KeyEvent.VK_ENTER])
+			isMainMenu = false;
 		if(input.keys[KeyEvent.VK_ESCAPE]) {
 			System.exit(0);
 		}
@@ -84,6 +88,7 @@ public class RetroGame extends Canvas implements Runnable {
 			PlayerCoordinateX++;
 		}
 		if(input.keys[KeyEvent.VK_S]) {
+			if(PlayerCoordinateY <= 0)
 			PlayerCoordinateY++;
 		}
 		if(input.keys[KeyEvent.VK_W]) {
