@@ -16,9 +16,9 @@ import httf.util.InputHandler;
 
 public class RetroGame extends Canvas implements Runnable {
 	
-	public final int WIDTH = 300;
-	public final int HEIGHT = 210;
-	public final int SCALE = 4;
+	public static final int WIDTH = 300;
+	public static final int HEIGHT = 210;
+	public static final int SCALE = 4;
 	
 	public JFrame frame;
 	public BufferedImage img;

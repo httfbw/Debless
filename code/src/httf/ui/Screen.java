@@ -1,6 +1,7 @@
 package httf.ui;
 
 import httf.util.ResourceLoader;
+import httf.map.Maze;
 
 public class Screen extends Bitmap {
 	
