@@ -1,21 +1,18 @@
 package httf.ui;
 
 import httf.RetroGame;
-import httf.map.Maze;
-import httf.util.*;
+import httf.map.*;
 
 public class Screen extends Bitmap {
 	
 	public Maze maze;
 	
-	public Bitmap player;
-	public int xPlayer = 0;
-	public int yPlayer = 0;
+	public Player player;
 	
 	public Screen(int width, int height) {
 		super(width, height);
 		maze = new Maze(RetroGame.WIDTH, RetroGame.HEIGHT, Maze.RANDOM);
-		player = ResourceLoader.loadTexture("player");
+		player = new Player(width / 2, height / 2);
 	}
 	
 	public void render() {
@@ -23,8 +20,8 @@ public class Screen extends Bitmap {
 			for(int y = 0; y < height; y++)
 				pixels[x][y] = 0x343434;
 		
-		draw(maze.level, 0, 0);
-		draw(player, xPlayer, yPlayer);
+		draw(maze.getPlayerView(3), 0, 0);
+		draw(player.texture, (int) player.x, (int) player.y);
 	}
 	
 }

@@ -78,16 +78,28 @@ public class RetroGame extends Canvas implements Runnable {
 			System.exit(0);
 		}
 		if(input.keys[KeyEvent.VK_W]) {
-			if(screen.yPlayer > 0) screen.yPlayer--;
+			if(screen.player.y > 0) {
+				screen.player.y -= 0.5f;
+				screen.maze.tick(0, -1);
+			}
 		}
 		if(input.keys[KeyEvent.VK_A]) {
-			if(screen.xPlayer > 0) screen.xPlayer--;
+			if(screen.player.x > 0) {
+				screen.player.x -= 0.5f;
+				screen.maze.tick(-1, 0);
+			}
 		}
 		if(input.keys[KeyEvent.VK_S]) {
-			if(screen.yPlayer < HEIGHT - 24) screen.yPlayer++;
+			if(screen.player.y < HEIGHT - 24) {
+				screen.player.y += 0.5f;
+				screen.maze.tick(0, 1);
+			}
 		}
 		if(input.keys[KeyEvent.VK_D]) {
-			if(screen.xPlayer < WIDTH - 16) screen.xPlayer++;
+			if(screen.player.x < WIDTH - 16) {
+				screen.player.x += 0.5f;
+				screen.maze.tick(1, 0);
+			}
 		}
 	}
 	
