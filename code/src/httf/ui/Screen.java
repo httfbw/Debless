@@ -29,8 +29,20 @@ public class Screen extends Bitmap {
 		Random rand = new Random();
 		for(int x = 0; x < 11; x++) {
 			for(int y = 0; y < 11; y++) {
-				if(x == 0 || x == 10 || y == 0 || y == 10) {
-					tiles.add(new Tile(x, y, Tile.wall));
+//				if(x == 0 || x == 10 || y == 0 || y == 10) {
+//					tiles.add(new Tile(x, y, Tile.wall));
+//				}
+				if(x == 0) {
+					tiles.add(new Tile(x, y, Tile.wallLeft));
+				}
+				if(x == 10) {
+					tiles.add(new Tile(x, y, Tile.wallRight));
+				}
+				if(y == 0) {
+					tiles.add(new Tile(x, y, Tile.wallTop));
+				}
+				if(y == 10) {
+					tiles.add(new Tile(x, y, Tile.wallBottom));
 				}
 				else {
 					int id = rand.nextInt(3);
@@ -61,13 +73,13 @@ public class Screen extends Bitmap {
 				pixels[x][y] = 0x343434;
 		
 		for(int i = 0; i < tiles.size(); i++) {
-			draw(tiles.get(i).tex, (width / 2 - 80 - 24) + tiles.get(i).x * 16, (height / 2 - 80 - 6) + tiles.get(i).y * 16);
+			draw(tiles.get(i).tex, (width / 2 - 80 - 24) + tiles.get(i).x * 16, (height / 2 - 80 - 14) + tiles.get(i).y * 16);
 		}
 		draw(player.texture, (width / 2 - (88 + 16)) + maze.getXPlayer(), (height / 2 - (88 + 16)) + maze.getYPlayer());
 		draw(tv, 0, 0);
 		maze.generateDepthFirstSearch();
-		draw(maze.level, 0, 0);
-//		draw(maze.getPlayerView(3), 32, 28);
+//		draw(maze.level, 0, 0);
+		draw(maze.getPlayerView(3), 32, 28);
 	}
 	
 	public void postProcess() {
