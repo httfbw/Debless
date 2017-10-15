@@ -74,7 +74,6 @@ public class RetroGame extends Canvas implements Runnable {
 	}
 	
 	private void tick() {
-		screen.maze.tick(0, 0);
 		if(input.keys[KeyEvent.VK_ESCAPE]) {
 			System.exit(0);
 		}

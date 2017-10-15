@@ -15,23 +15,19 @@ public class Screen extends Bitmap {
 	public Maze maze;
 	public Player player;
 	public List<Tile> tiles;
-	public boolean genSlow = true;
 	
 	public Bitmap tv;
 	
 	public Screen(int width, int height) {
 		super(width, height);
-//		maze = new Maze(RetroGame.WIDTH/2, RetroGame.HEIGHT/2, Maze.DEPTH_FIRST_SEARCH, 160);
-		maze = new Maze(RetroGame.WIDTH / 3, RetroGame.HEIGHT / 3, genSlow ? Maze.DEPTH_FIRST_SEARCH_SLOW : Maze.DEPTH_FIRST_SEARCH, 160);
+		maze = new Maze(RetroGame.WIDTH / 3, RetroGame.HEIGHT / 3, Maze.DEPTH_FIRST_SEARCH, 160);
 		tv = ResourceLoader.loadTexture("oldtv");
 		player = new Player(width / 2 - 8, height / 2 - 8);
 		tiles = new ArrayList<>();
-//		tiles.add(new Tile(0, 0, Tile.wall));
 		Random rand = new Random();
 		for(int x = 0; x < 11; x++) {
 			for(int y = 0; y < 11; y++) {
 				if(x == 0 || x == 10 || y == 0 || y == 10) {
-//					tiles.add(new Tile(x, y, Tile.wall));
 					if(x == 0) {
 						tiles.add(new Tile(x, y, Tile.wallLeft));
 					}
@@ -73,53 +69,21 @@ public class Screen extends Bitmap {
 			for(int y = 0; y < height; y++)
 				pixels[x][y] = 0x343434;
 		
-//		Bitmap playerView = maze.getPlayerView(1);
-//		Bitmap borderTex;
-//		boolean wall = false;
-//		
-//		if(playerView.pixels[1][0] == 0xFFFFFFFF) {
-//			borderTex = Tile.floor0;
-//			wall = true;
-//		}
-//		else borderTex = Tile.wallRight;
-//		if(playerView.pixels[1][2] == 0xFFFFFFFF) {
-//			borderTex = Tile.floor0;
-//			wall = true;
-//		}
-//		else borderTex = Tile.wallLeft;
-//		if(playerView.pixels[0][1] == 0xFFFFFFFF) {
-//			borderTex = Tile.floor0;
-//			wall = true;
-//		}
-//		else borderTex = Tile.wallTop;
-//		if(playerView.pixels[2][2] == 0xFFFFFFFF) {
-//			borderTex = Tile.floor0;
-//			wall = true;
-//		}
-//		else borderTex = Tile.wallBottom;
-//		
-//		for(int x = 0; x < 10; x++) {
-//			for(int y = 0; y < 10; y++) {
-//				if((x == 0 || x == 10 || y == 0 || y == 10) && (!wall)) {
-//					draw(borderTex, (width / 2 - 80 - 24) + tiles.get(x + y * 10).x * 16, (height / 2 - 80 - 14) + tiles.get(x + y * 10).y * 16, false);
-//				}
-//				else {
-//					draw(tiles.get(x + y * 10).tex, (width / 2 - 80 - 24) + tiles.get(x + y * 10).x * 16, (height / 2 - 80 - 14) + tiles.get(x + y * 10).y * 16, false);
-//				}
-// 			}
-//		}
-		
 		for(int i = 0; i < tiles.size(); i++) {
 			draw(tiles.get(i).tex, (width / 2 - 80 - 24) + tiles.get(i).x * 16, (height / 2 - 80 - 14) + tiles.get(i).y * 16);
 		}
 		draw(player.texture, (width / 2 - (88 + 18)) + maze.getXPlayer(), (height / 2 - (88 + 16)) + maze.getYPlayer());
 		draw(tv, 0, 0);
-		draw(maze.level, 0, 0);
+//		draw(maze.level, 0, 0);
 		draw(maze.getPlayerView(5), 32, 28);
 	}
 	
 	public void postProcess() {
-		
+//		for(int x = 0; x < pixels.length; x++) {
+//			for(int y = 0; y < pixels[x].length; y++) {
+//				pixels[x][y] = pixels[x][y] * 2;
+//			}
+//		}
 	}
 	
 }
