@@ -225,11 +225,15 @@ public class Maze {
 		// Old file: /home/christian/workspace/httf/code/src/httf/map/Maze.java
 		try {
 		if (xPlayer < 0) {
+			try {
 			if (level.pixels[xPos - 1][yPos] != 0x000000) {
 				xPos--;
 				xPlayer = blockSize;
 			} else {
 				xPlayer = 0;
+			}
+			} catch(ArrayIndexOutOfBoundsException e) {
+				
 			}
 		} else if (xPlayer > blockSize) {
 			if (level.pixels[xPos + 1][yPos] != 0x000000) {
@@ -259,6 +263,7 @@ public class Maze {
 		draw(xPos, yPos, 0xFF0000);
 		} catch(ArrayIndexOutOfBoundsException e) {
 			System.out.println("End of Map reached");
+			System.out.println(xPlayer + " " + yPlayer + " : " + xPos + " " + yPos);
 		}
 		
 	}
