@@ -181,7 +181,6 @@ public class Maze {
 				} else {
 					level.pixels[x][y] = 0xFFFFFF;
 				}
-
 			}
 		}
 	}
