@@ -26,7 +26,7 @@ public class TextLine {
 	
 	public void render(Bitmap root) {
 		for(int i = 0; i < chars.length; i++) {
-			root.draw(chars[i], x + (i * 8), y, false);
+			root.draw(chars[i], x + (i * 8), y);
 		}
 	}
 	
