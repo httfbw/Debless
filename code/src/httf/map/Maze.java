@@ -36,7 +36,7 @@ public class Maze {
 		Random rand = new Random();
 		xPos = rand.nextInt(width);
 		yPos = rand.nextInt(height);
-
+		
 		extraXPos = xPos;
 		extraYPos = yPos;
 
@@ -63,13 +63,13 @@ public class Maze {
 						notDone = false;
 						System.out.println("actually done");
 					} else {
-						level.pixels[xPos][yPos] = 0xFFFFFF;
+						level.pixels[xPos][yPos] = 0xFFFFFFFF;
 						xPos += dir[0];
 						yPos += dir[1];
-						level.pixels[xPos][yPos] = 0xFFFFFF;
+						level.pixels[xPos][yPos] = 0xFFFFFFFF;
 						xPos += dir[0];
 						yPos += dir[1];
-						level.pixels[xPos][yPos] = 0xFFFFFF;
+						level.pixels[xPos][yPos] = 0xFFFFFFFF;
 					}
 				} else {
 					level.pixels[xPos][yPos] = 0xFFF000;
@@ -201,6 +201,9 @@ public class Maze {
 			for (int y = 0; y < playerView.pixels[x].length; y++) {
 				try {
 					playerView.pixels[x][y] = level.pixels[xLoad][yLoad];
+//					System.out.println(level.pixels[xLoad][yLoad]);
+//					playerView.pixels[x][y] = 0xFFFFFFFF;
+//					System.out.println(0xFFFFFFFF);
 				} catch (ArrayIndexOutOfBoundsException e) {
 					playerView.pixels[x][y] = 0x111111;
 				}
@@ -217,47 +220,50 @@ public class Maze {
 			generateDepthFirstSearch();
 			return;
 		}
-		draw(xPos, yPos, 0xFFFFFF);
+		draw(xPos, yPos, 0xFFFFFFFF);
 		xPlayer += xVec;
 		yPlayer += yVec;
 
-		// Old file: /home/christian/workspace/httf/code/src/httf/map/Maze.java
 		try {
-		if (xPlayer < 0) {
-			if (level.pixels[xPos - 1][yPos] != 0x000000) {
-				xPos--;
-				xPlayer = blockSize;
-			} else {
-				xPlayer = 0;
+			if (xPlayer < 0) {
+				if (level.pixels[xPos - 1][yPos] != 0x000000) {
+					xPos--;
+					xPlayer = blockSize;
+				} else {
+					xPlayer = 0;
+				}
+			} else if (xPlayer > blockSize) {
+				if (level.pixels[xPos + 1][yPos] != 0x000000) {
+					xPos++;
+					xPlayer = 0;
+				} else {
+					xPlayer = blockSize;
+				}
 			}
-		} else if (xPlayer > blockSize) {
-			if (level.pixels[xPos + 1][yPos] != 0x000000) {
-				xPos++;
-				xPlayer = 0;
-			} else {
-				xPlayer = blockSize;
+	
+			if (yPlayer < 0) {
+				if (level.pixels[xPos][yPos - 1] != 0x000000) {
+					yPos--;
+					yPlayer = blockSize;
+				} else {
+					yPlayer = 0;
+				}
+			} else if (yPlayer > blockSize) {
+				if (level.pixels[xPos][yPos + 1] != 0x000000) {
+					yPos++;
+					yPlayer = 0;
+				} else {
+					yPlayer = blockSize;
+				}
 			}
-		}
-
-		if (yPlayer < 0) {
-			if (level.pixels[xPos][yPos - 1] != 0x000000) {
-				yPos--;
-				yPlayer = blockSize;
-			} else {
-				yPlayer = 0;
-			}
-		} else if (yPlayer > blockSize) {
-			if (level.pixels[xPos][yPos + 1] != 0x000000) {
-				yPos++;
-				yPlayer = 0;
-			} else {
-				yPlayer = blockSize;
-			}
-		}
-
-		draw(xPos, yPos, 0xFF0000);
+	
+			draw(xPos, yPos, 0xFF0000FF);
 		} catch(ArrayIndexOutOfBoundsException e) {
 			System.out.println("End of Map reached");
+			xPlayer -= xVec;
+			yPlayer -= yVec;
+
+			
 		}
 		
 	}

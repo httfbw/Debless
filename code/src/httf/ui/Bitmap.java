@@ -23,7 +23,8 @@ public class Bitmap {
 //		}
 		for(int x = 0; x < map.width; x++) {
 			for(int y = 0; y < map.height; y++) {
-//				if(player) System.out.println(map.pixels[x][y]);
+//				if(player) 
+//					System.out.println(map.pixels[x][y]);
 				if(map.pixels[x][y] < 0) {
 					pixels[x + xOffs][y + yOffs] = map.pixels[x][y];
 //					if(player) System.out.println("PLAYER");
