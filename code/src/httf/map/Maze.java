@@ -202,7 +202,6 @@ public class Maze {
 			for (int y = 0; y < playerView.pixels[x].length; y++) {
 				try {
 					playerView.pixels[x][y] = level.pixels[xLoad][yLoad];
-//					System.out.println(level.pixels[xLoad][yLoad]);
 				} catch (ArrayIndexOutOfBoundsException e) {
 					playerView.pixels[x][y] = 0x111111;
 				}
