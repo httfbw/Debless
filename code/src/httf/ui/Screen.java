@@ -15,14 +15,14 @@ public class Screen extends Bitmap {
 	public Maze maze;
 	public Player player;
 	public List<Tile> tiles;
-	public boolean genSlow = true;
+	//public boolean genSlow = false;
 	
 	public Bitmap tv;
 	
 	public Screen(int width, int height) {
 		super(width, height);
 //		maze = new Maze(RetroGame.WIDTH/2, RetroGame.HEIGHT/2, Maze.DEPTH_FIRST_SEARCH, 160);
-		maze = new Maze(RetroGame.WIDTH / 3, RetroGame.HEIGHT / 3, genSlow ? Maze.DEPTH_FIRST_SEARCH_SLOW : Maze.DEPTH_FIRST_SEARCH, 160);
+		maze = new Maze(RetroGame.WIDTH / 3, RetroGame.HEIGHT / 3, Maze.DEPTH_FIRST_SEARCH, 160);
 		tv = ResourceLoader.loadTexture("oldtv");
 		player = new Player(width / 2 - 8, height / 2 - 8);
 		tiles = new ArrayList<>();
