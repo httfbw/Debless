@@ -3,6 +3,7 @@ package httf;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Graphics;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
@@ -16,9 +17,11 @@ import httf.util.InputHandler;
 
 public class RetroGame extends Canvas implements Runnable {
 	
-	public static final int WIDTH = 300;
-	public static final int HEIGHT = 210;
+	public static int WIDTH = 300;
+	public static int HEIGHT = 210;
 	public static final int SCALE = 4;
+	public static final String TITLE = "Hack to the future 2017";
+	public static final boolean FULLSCREEN = false;
 	
 	public JFrame frame;
 	public BufferedImage img;
@@ -32,7 +35,7 @@ public class RetroGame extends Canvas implements Runnable {
 	
 	public RetroGame() {
 		input = new InputHandler(65535);
-		frame = new JFrame("Hack to the future 2017");
+		frame = new JFrame(TITLE + " | 000");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(WIDTH * SCALE, HEIGHT * SCALE);
 		frame.setLocationRelativeTo(null);
@@ -41,6 +44,7 @@ public class RetroGame extends Canvas implements Runnable {
 		frame.addMouseListener(input);
 		frame.addMouseMotionListener(input);
 		frame.addMouseWheelListener(input);
+		if(FULLSCREEN) frame.setUndecorated(true);
 		
 		addKeyListener(input);
 		addMouseListener(input);
@@ -67,9 +71,18 @@ public class RetroGame extends Canvas implements Runnable {
 	
 	@Override
 	public void run() {
+		long lastTime = System.currentTimeMillis();
+		int frames = 0;
 		while(running) {
 			tick();
 			render();
+			frames++;
+			while(System.currentTimeMillis() - lastTime > 1000) {
+//				System.out.println(frames + " fps");
+				frame.setTitle(TITLE + " | " + frames);
+				lastTime += 1000;
+				frames = 0;
+			}
 		}
 	}
 	
@@ -140,6 +153,14 @@ public class RetroGame extends Canvas implements Runnable {
 	}
 	
 	public static void main(String[] args) {
+		if(FULLSCREEN) {
+			WIDTH = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+			HEIGHT = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+		}
+		else {
+			WIDTH = 300;
+			HEIGHT = 210;
+		}
 		new RetroGame();
 	}
 	

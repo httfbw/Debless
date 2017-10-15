@@ -74,7 +74,7 @@ public class Screen extends Bitmap {
 		}
 		draw(player.texture, (width / 2 - (88 + 18)) + maze.getXPlayer(), (height / 2 - (88 + 16)) + maze.getYPlayer());
 		draw(tv, 0, 0);
-//		draw(maze.level, 0, 0);
+//		draw(maze.level, 0, 0);0
 		draw(maze.getPlayerView(5), 32, 28);
 	}
 	
