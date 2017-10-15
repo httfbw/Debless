@@ -15,7 +15,7 @@ public class Bitmap {
 	public void draw(Bitmap map, int xOffs, int yOffs) {
 		for(int x = xOffs; x < map.width + xOffs; x++) {
 			for(int y = yOffs; y < map.height + yOffs; y++) { // 0xFFFFFeAA
-				if(map.pixels[x - xOffs][y - yOffs] < 0) {
+				if(map.pixels[x - xOffs][y - yOffs] != 0) {		// < 0 or make better
 					pixels[x][y] = map.pixels[x - xOffs][y - yOffs];
 				}
 			}

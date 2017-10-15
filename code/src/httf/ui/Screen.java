@@ -21,15 +21,15 @@ public class Screen extends Bitmap {
 	public Screen(int width, int height) {
 		super(width, height);
 //		maze = new Maze(RetroGame.WIDTH/2, RetroGame.HEIGHT/2, Maze.DEPTH_FIRST_SEARCH, 160);
-		maze = new Maze(RetroGame.WIDTH/8, RetroGame.HEIGHT/8, Maze.DEPTH_FIRST_SEARCH, 160);
+		maze = new Maze(RetroGame.WIDTH / 3, RetroGame.HEIGHT / 3, Maze.DEPTH_FIRST_SEARCH, 160);
 		tv = ResourceLoader.loadTexture("oldtv");
 		player = new Player(width / 2 - 8, height / 2 - 8);
 		tiles = new ArrayList<>();
 //		tiles.add(new Tile(0, 0, Tile.wall));
 		Random rand = new Random();
-		for(int x = 0; x < 10; x++) {
-			for(int y = 0; y < 10; y++) {
-				if(x == 0 || x == 9 || y == 0 || y == 9) {
+		for(int x = 0; x < 11; x++) {
+			for(int y = 0; y < 11; y++) {
+				if(x == 0 || x == 10 || y == 0 || y == 10) {
 					tiles.add(new Tile(x, y, Tile.wall));
 				}
 				else {
@@ -63,11 +63,11 @@ public class Screen extends Bitmap {
 		for(int i = 0; i < tiles.size(); i++) {
 			draw(tiles.get(i).tex, (width / 2 - 80 - 24) + tiles.get(i).x * 16, (height / 2 - 80 - 6) + tiles.get(i).y * 16);
 		}
-		draw(player.texture, (width / 2 - 88) + maze.getXPlayer(), (height / 2 - 88) + maze.getYPlayer());
-//		draw(maze.level, 0, 0);
-		draw(maze.getPlayerView(3), 32, 28);
+		draw(player.texture, (width / 2 - (88 + 16)) + maze.getXPlayer(), (height / 2 - (88 + 16)) + maze.getYPlayer());
 		draw(tv, 0, 0);
 		maze.generateDepthFirstSearch();
+		draw(maze.level, 0, 0);
+//		draw(maze.getPlayerView(3), 32, 28);
 	}
 	
 	public void postProcess() {
